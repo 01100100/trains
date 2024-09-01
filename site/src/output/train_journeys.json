@@ -212,7 +212,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": "N/A"
+        "bike_space_rating": "N/A",
+        "dep_country": "FR",
+        "arr_country": "FR"
       }
     },
     {
@@ -322,7 +324,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": "N/A"
+        "bike_space_rating": "N/A",
+        "dep_country": "FR",
+        "arr_country": "FR"
       }
     },
     {
@@ -552,7 +556,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": "N/A"
+        "bike_space_rating": "N/A",
+        "dep_country": "FR",
+        "arr_country": "FR"
       }
     },
     {
@@ -862,7 +868,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": "N/A"
+        "bike_space_rating": "N/A",
+        "dep_country": "FR",
+        "arr_country": "FR"
       }
     },
     {
@@ -924,7 +932,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": "N/A"
+        "bike_space_rating": "N/A",
+        "dep_country": "FR",
+        "arr_country": "FR"
       }
     },
     {
@@ -1010,7 +1020,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": 3
+        "bike_space_rating": 3,
+        "dep_country": "IT",
+        "arr_country": "IT"
       }
     },
     {
@@ -1176,7 +1188,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": 3
+        "bike_space_rating": 3,
+        "dep_country": "IT",
+        "arr_country": "IT"
       }
     },
     {
@@ -1254,7 +1268,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": 3
+        "bike_space_rating": 3,
+        "dep_country": "IT",
+        "arr_country": "IT"
       }
     },
     {
@@ -1332,7 +1348,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": 3
+        "bike_space_rating": 3,
+        "dep_country": "IT",
+        "arr_country": "IT"
       }
     },
     {
@@ -1570,7 +1588,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": 3
+        "bike_space_rating": 3,
+        "dep_country": "IT",
+        "arr_country": "IT"
       }
     },
     {
@@ -1680,7 +1700,9 @@
         "train_type": "Regional",
         "wifi": "No",
         "toilets": "Yes",
-        "bike_space_rating": 3
+        "bike_space_rating": 3,
+        "dep_country": "IT",
+        "arr_country": "IT"
       }
     }
   ]

@@ -1,0 +1,159 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.9045027,
+          42.4590464
+        ]
+      },
+      "properties": {
+        "name": "Latour-de-Carol \u2013 Enveitg",
+        "country": "FR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.444004774093628,
+          43.60446386099808
+        ]
+      },
+      "properties": {
+        "name": "Toulouse",
+        "country": "FR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.00591,
+          43.190387
+        ]
+      },
+      "properties": {
+        "name": "Narbonne",
+        "country": "FR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.371000170707703,
+          43.29640973957932
+        ]
+      },
+      "properties": {
+        "name": "Marseille",
+        "country": "FR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2719407081603995,
+          43.69664545590452
+        ]
+      },
+      "properties": {
+        "name": "Nice",
+        "country": "FR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.7842678,
+          43.8222561
+        ]
+      },
+      "properties": {
+        "name": "Sanremo",
+        "country": "IT"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.470103,
+          44.307273
+        ]
+      },
+      "properties": {
+        "name": "Savona",
+        "country": "IT"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.237225,
+          45.485066
+        ]
+      },
+      "properties": {
+        "name": "Milano Lambrate",
+        "country": "IT"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.212869,
+          45.532161
+        ]
+      },
+      "properties": {
+        "name": "Brescia",
+        "country": "IT"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.982741,
+          45.428659
+        ]
+      },
+      "properties": {
+        "name": "Verona Porta Nuova",
+        "country": "IT"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.532575,
+          46.601239
+        ]
+      },
+      "properties": {
+        "name": "Ponte Gardena/Waidbruck",
+        "country": "IT"
+      }
+    }
+  ]
+}

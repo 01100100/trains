@@ -2,16 +2,28 @@ import csv
 import json
 import requests
 
-# Read train station data from CSV
+# Read train station data from CSV and create a lookup table
 stations = {}
 with open("data/trainline.csv", newline="") as csvfile:
     reader = csv.DictReader(csvfile, delimiter=";")
     for row in reader:
         if row["name"] not in stations:
             stations[row["name"]] = []
-        stations[row["name"]].append(row["id"])
+        stations[row["name"]].append(
+            {
+                "id": row["id"],
+                "lat": row["latitude"],
+                "lon": row["longitude"],
+                "country": row["country"],
+                "uic8_sncf": row["uic8_sncf"],
+                "sncf_id": row["sncf_id"],
+                "obb_id": row["obb_id"],
+                "trenitalia_id": row["trenitalia_id"],
+                "trenord_id": row["trenord_id"],
+                "db_id": row["db_id"],
+            }
+        )
 
-# Read train journey data from JSON
 with open("data/journey.json") as jsonfile:
     journey = json.load(jsonfile)
 
@@ -32,47 +44,73 @@ def get_geojson_feature(dep_id, arr_id):
 
 
 # Create GeoJSON FeatureCollection
-features = []
-for train in journey:
+train_journeys_features = []
+train_station_features = []
+for trip in journey:
     print(
-        f"🚂 Processing train from {train['start_station']} to {train['end_station']}"
+        f"🚂 Processing train from {trip['start_station']} to {trip['end_station']}"
     )
-    dep_ids = stations.get(train["start_station"], [])
-    arr_ids = stations.get(train["end_station"], [])
+    possible_departure_stations = stations.get(trip["start_station"], [])
+    possible_arrival_stations = stations.get(trip["end_station"], [])
     feature = None
-    if len(dep_ids) == 0:
-        print(f"❌ No station found for {train['start_station']}")
+    if len(possible_departure_stations) == 0:
+        print(f"❌ No station found for {trip['start_station']}")
         continue
-    if len(arr_ids) == 0:
-        print(f"❌ No station found for {train['end_station']}")
+    if len(possible_arrival_stations) == 0:
+        print(f"❌ No station found for {trip['end_station']}")
         continue
-    for dep_id in dep_ids:
-        for arr_id in arr_ids:
+    for dep in possible_departure_stations:
+        for arr in possible_arrival_stations:
             print(
-                f"🔄 Trying route from {train['start_station']} to {train['end_station']} with id {dep_id} to {arr_id}"
+                f"🔄 Trying route from {trip['start_station']} to {trip['end_station']} with id {dep["id"]} to {arr["id"]}"
             )
             try:
-                feature = get_geojson_feature(dep_id, arr_id)
+                feature = get_geojson_feature(dep["id"], arr["id"])
                 if feature:
-                    feature["properties"] = train
-                    features.append(feature)
+                    feature["properties"] = trip
+                    feature["properties"]["dep_country"] =  dep["country"]
+                    feature["properties"]["arr_country"] =  arr["country"]
+                    train_journeys_features.append(feature)
                     print(
-                        f"✅ Found valid route from {train['start_station']} to {train['end_station']}"
+                        f"✅ Found valid route from {trip['start_station']} to {trip['end_station']}"
+                    )
+                    train_station_features.append(
+                        {
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [float(dep["lon"]), float(dep["lat"])],
+                            },
+                            "properties": {
+                                "name": trip["start_station"],
+                                "country": dep["country"],
+                            },
+                        }
                     )
                     break  # Exit the loop if a valid feature is found
             except requests.RequestException as e:
                 print(
-                    f"⚠️ Request failed for {train['start_station']} to {train['end_station']} with id {dep_id} to {arr_id}: {e}"
+                    f"⚠️ Request failed for {trip['start_station']} to {trip['end_station']} with id {dep["id"]} to {arr["id"]}: {e}"
                 )
         if feature:
             break  # Exit the outer loop if a valid feature is found
     if not feature:
         print(
-            f"❌ No valid route found from {train['start_station']} to {train['end_station']}"
+            f"❌ No valid route found from {trip['start_station']} to {trip['end_station']}"
         )
 
-geojson_feature_collection = {"type": "FeatureCollection", "features": features}
+# Output the GeoJSON FeatureCollection
+with open("site/src/output/train_journeys.json", "w") as geojsonfile:
+    json.dump(
+        {"type": "FeatureCollection", "features": train_journeys_features},
+        geojsonfile,
+        indent=2,
+    )
 
 # Output the GeoJSON FeatureCollection
-with open("output/train_journeys.geojson", "w") as geojsonfile:
-    json.dump(geojson_feature_collection, geojsonfile, indent=2)
+with open("site/src/output/train_stations.geojson", "w") as geojsonfile:
+    json.dump(
+        {"type": "FeatureCollection", "features": train_station_features},
+        geojsonfile,
+        indent=2,
+    )
