@@ -67,6 +67,6 @@ Then open the `output/total_journey.geojson` file in a editor and add any additi
 
 ## Shoutouts
 
-This relies on [https://trainmap.ntag.fr/](https://trainmap.ntag.fr/) which is explained in the [blog post](https://ntag.fr/trainmap/).
+This project relies on [https://trainmap.ntag.fr/](https://trainmap.ntag.fr/) to fetch the geometric data for the train journeys. This is explained in the [blog post](https://ntag.fr/trainmap/).
 
 Big thanks to the OpenStreetMap community for providing the data to make this possible.
