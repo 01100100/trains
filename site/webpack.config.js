@@ -34,7 +34,7 @@ module.exports = {
       template: './src/index.html',
       inject: true,
     }),
-    new FaviconsWebpackPlugin('./src/assets/logo.png')
+    new FaviconsWebpackPlugin('./src/assets/logo.jpeg')
   ],
   output: {
     filename: '[name].bundle.js',

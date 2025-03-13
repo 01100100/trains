@@ -47,9 +47,7 @@ def get_geojson_feature(dep_id, arr_id):
 train_journeys_features = []
 train_station_features = []
 for trip in journey:
-    print(
-        f"🚂 Processing train from {trip['start_station']} to {trip['end_station']}"
-    )
+    print(f"🚂 Processing train from {trip['start_station']} to {trip['end_station']}")
     possible_departure_stations = stations.get(trip["start_station"], [])
     possible_arrival_stations = stations.get(trip["end_station"], [])
     feature = None
@@ -68,25 +66,40 @@ for trip in journey:
                 feature = get_geojson_feature(dep["id"], arr["id"])
                 if feature:
                     feature["properties"] = trip
-                    feature["properties"]["dep_country"] =  dep["country"]
-                    feature["properties"]["arr_country"] =  arr["country"]
+                    feature["properties"]["dep_country"] = dep["country"]
+                    feature["properties"]["arr_country"] = arr["country"]
                     train_journeys_features.append(feature)
                     print(
                         f"✅ Found valid route from {trip['start_station']} to {trip['end_station']}"
                     )
-                    train_station_features.append(
-                        {
-                            "type": "Feature",
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [float(dep["lon"]), float(dep["lat"])],
-                            },
-                            "properties": {
-                                "name": trip["start_station"],
-                                "country": dep["country"],
-                            },
-                        }
-                    )
+
+                    dep_station = {
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [float(dep["lon"]), float(dep["lat"])],
+                        },
+                        "properties": {
+                            "name": trip["start_station"],
+                            "country": dep["country"],
+                        },
+                    }
+                    if dep_station not in train_station_features:
+                        train_station_features.append(dep_station)
+
+                    arr_station = {
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [float(arr["lon"]), float(arr["lat"])],
+                        },
+                        "properties": {
+                            "name": trip["end_station"],
+                            "country": arr["country"],
+                        },
+                    }
+                    if arr_station not in train_station_features:
+                        train_station_features.append(arr_station)
                     break  # Exit the loop if a valid feature is found
             except requests.RequestException as e:
                 print(
@@ -99,7 +112,7 @@ for trip in journey:
             f"❌ No valid route found from {trip['start_station']} to {trip['end_station']}"
         )
 
-# Output the GeoJSON FeatureCollection
+
 with open("site/src/output/train_journeys.json", "w") as geojsonfile:
     json.dump(
         {"type": "FeatureCollection", "features": train_journeys_features},
@@ -107,8 +120,7 @@ with open("site/src/output/train_journeys.json", "w") as geojsonfile:
         indent=2,
     )
 
-# Output the GeoJSON FeatureCollection
-with open("site/src/output/train_stations.geojson", "w") as geojsonfile:
+with open("site/src/output/train_stations.json", "w") as geojsonfile:
     json.dump(
         {"type": "FeatureCollection", "features": train_station_features},
         geojsonfile,

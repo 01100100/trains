@@ -76,6 +76,20 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          7.504349,
+          43.776486
+        ]
+      },
+      "properties": {
+        "name": "Menton",
+        "country": "FR"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           7.7842678,
           43.8222561
         ]
@@ -152,6 +166,20 @@
       },
       "properties": {
         "name": "Ponte Gardena/Waidbruck",
+        "country": "IT"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.505428,
+          47.002338
+        ]
+      },
+      "properties": {
+        "name": "Brennero/Brenner",
         "country": "IT"
       }
     }

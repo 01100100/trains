@@ -1,6 +1,7 @@
 import { Map, Popup } from "maplibre-gl";
+import { FeatureCollection, LineString, Point } from "geojson";
 import trainJourney from "./output/train_journeys.json";
-import { FeatureCollection, LineString } from "geojson";
+import trainStations from "./output/train_stations.json";
 
 const map = new Map({
   container: "map",
@@ -47,7 +48,7 @@ function hexToHSL(hex: string): { h: number, s: number, l: number } {
 function generateColor(baseColor: string, identifier: string): string {
   const baseHSL = hexToHSL(baseColor);
   const hash = Array.from(identifier).reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const hueVariation = (hash % 30) - Math.random() * 100;
+  const hueVariation = (hash % 30) - Math.random() * 40;
   const newHue = (baseHSL.h + hueVariation + 360) % 360;
   return `hsl(${newHue}, ${baseHSL.s}%, ${baseHSL.l}%)`;
 }
@@ -102,6 +103,26 @@ map.on('load', () => {
       ]
     }
   });
+
+  map.addSource('trainStations', {
+    type: 'geojson',
+    data: trainStations as FeatureCollection<Point>
+  });
+
+  map.addLayer({
+    id: 'trainStationsLayer',
+    type: 'circle',
+    source: 'trainStations',
+    paint: {
+      'circle-radius': 4,
+      'circle-color': '#000000',
+      'circle-stroke-color': '#FFFFFF',
+      'circle-stroke-width': 1
+    }
+  });
+
+
+
 
   let popup: Popup | null = null;
   let hoveredFeatureId: number | null = null;
